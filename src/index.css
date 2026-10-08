@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+body { @apply bg-steel text-ink-soft font-sans antialiased; }
+
+@layer components {
+  /* Ticket card: a dashed "perforation" near the top, evoking a physical repair
+     ticket/warranty tag — ties directly to the product's "every repair is documented"
+     promise. Swap for Figma's actual card style once shared. */
+  .ticket {
+    @apply relative bg-paper border border-line rounded-[7px] p-3.5 mb-3;
+    box-shadow: 0 1px 0 rgba(21, 35, 59, 0.06);
+  }
+  .ticket::before {
+    content: '';
+    @apply absolute left-3.5 right-3.5 top-0;
+    border-top: 1.5px dashed rgba(21, 35, 59, 0.14);
+  }
+  .ticket-no-perf::before { content: none; }
+
+  .stamp {
+    @apply inline-flex items-center gap-1 border-2 border-amber text-amber rounded-md px-2.5 py-0.5
+           text-[11px] font-bold tracking-wide font-display;
+    transform: rotate(-3deg);
+  }
+
+  .btn { @apply inline-flex items-center justify-center gap-1.5 font-semibold text-sm rounded-[7px] px-4 py-3 w-full transition active:translate-y-px; }
+  .btn-primary { @apply btn bg-brand text-white active:bg-brand-dark disabled:bg-ink-mute disabled:cursor-not-allowed; }
+  .btn-amber { @apply btn bg-amber text-white; }
+  .btn-outline { @apply btn bg-transparent text-brand border-[1.5px] border-brand; }
+  .btn-ghost { @apply inline-flex items-center justify-center gap-1.5 text-sm text-ink-mute bg-transparent px-2 py-2; }
+  .btn-sm { @apply w-auto px-3 py-2 text-[13px]; }
+
+  .field-input {
+    @apply w-full px-3 py-2.5 border-[1.5px] border-line rounded-[7px] bg-paper text-sm text-ink-soft
+           focus:outline focus:outline-2 focus:outline-brand focus:border-brand;
+  }
+  .field-label { @apply block text-[13px] font-semibold text-ink mb-1.5; }
+  .field-error { @apply text-alert text-xs mt-1; }
+  .field-hint { @apply text-[11px] text-ink-mute mt-1; }
+
+  .chip {
+    @apply border-[1.5px] border-line rounded-full px-3.5 py-2 text-[13px] bg-paper text-ink-soft cursor-pointer select-none;
+  }
+  .chip-selected { @apply bg-brand text-white border-brand; }
+
+  .badge { @apply inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full; }
+  .badge-open { @apply badge bg-steel-dim text-ink-mute; }
+  .badge-progress { @apply badge bg-amber-dim text-[#7A4A17]; }
+  .badge-success { @apply badge bg-success-bg text-success; }
+  .badge-alert { @apply badge bg-alert-bg text-alert; }
+}
